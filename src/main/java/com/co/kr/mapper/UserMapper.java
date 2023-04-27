@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.co.kr.domain.LoginDomain;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+
 @Mapper
 public interface UserMapper {
 	
@@ -26,7 +28,8 @@ public interface UserMapper {
     public LoginDomain mbGetId(Map<String, String> map);
     
     //중복체크
-    public int mbDuplicationCheck(Map<String, String> map);
+    @NotNull
+    public int mbDuplicationCheck(Map<String, String> map);  ///수정
     
     //업데이트
     public void mbUpdate(LoginDomain loginDomain);
