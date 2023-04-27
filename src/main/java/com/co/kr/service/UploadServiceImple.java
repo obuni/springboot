@@ -31,6 +31,7 @@ import com.co.kr.mapper.UploadMapper;
 import com.co.kr.util.CommonUtils;
 import com.co.kr.vo.FileListVO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

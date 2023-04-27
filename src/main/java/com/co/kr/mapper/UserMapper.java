@@ -28,7 +28,6 @@ public interface UserMapper {
     public LoginDomain mbGetId(Map<String, String> map);
     
     //중복체크
-    @NotNull
     public int mbDuplicationCheck(Map<String, String> map);  ///수정
     
     //업데이트

@@ -27,18 +27,21 @@ import com.co.kr.util.CommonUtils;
 import com.co.kr.util.Pagination;
 import com.co.kr.vo.LoginVO;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j 
-//@RequestMapping(value = "/")  //////////수정
+@RequestMapping(value = "/")  //////////수정
+
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private UserService userService;   //////수정
 	
 	@Autowired
-	private UploadService uploadService;
+	private UploadService uploadService;  ////수정
 
 	@RequestMapping(value = "board")
 	public ModelAndView login(LoginVO loginDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -57,7 +60,7 @@ public class UserController {
 		
 		if(dupleCheck == 0) {  
 			String alertText = "없는 아이디이거나 패스워드가 잘못되었습니다. 가입해주세요";
-			String redirectPath = "/main/signin";
+			String redirectPath = "/main/signin";   
 			CommonUtils.redirect(alertText, redirectPath, response);
 			return mav;
 		}
@@ -168,7 +171,7 @@ public class UserController {
 	
 	
 	//수정페이지 이동
-	@GetMapping("modify/{mbSeq}")  ////////////수정
+	@GetMapping("/modify/{mbSeq}")  ////////////수정
     public ModelAndView mbModify(@PathVariable("mbSeq") String mbSeq, RedirectAttributes re) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		re.addAttribute("mbSeq", mbSeq);
@@ -195,7 +198,7 @@ public class UserController {
 	
 	
 	//수정업데이트
-	@RequestMapping("update")  ////////////////수정
+	@RequestMapping("/update")  ////////////////수정
 	public ModelAndView mbModify(LoginVO loginVO, HttpServletRequest request, RedirectAttributes re) throws IOException {
 		
 		ModelAndView mav = new ModelAndView();
@@ -226,7 +229,7 @@ public class UserController {
 	
 	
 	//삭제
-	@GetMapping("remove/{mbSeq}")   ///////////수정
+	@GetMapping("/remove/{mbSeq}")   ///////////수정
     public ModelAndView mbRemove(@PathVariable("mbSeq") String mbSeq, RedirectAttributes re, HttpServletRequest request) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		
@@ -245,6 +248,7 @@ public class UserController {
 	
 	
 	// 어드민의 멤버추가 & 회원가입
+	@NotNull
 	@PostMapping("create")
 	public ModelAndView create(LoginVO loginVO, HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
@@ -264,15 +268,16 @@ public class UserController {
 		
 		
 		// 중복체크
-		int dupleCheck = userService.mbDuplicationCheck(map);
+		@NotNull
+		Integer dupleCheck = userService.mbDuplicationCheck(map);
 		System.out.println(dupleCheck);
 
 		if(dupleCheck > 0) { // 가입되있으면  
 			String alertText = "중복이거나 유효하지 않은 접근입니다";
-			String redirectPath = "/main";
+			String redirectPath = "main";   ///////수정
 			System.out.println(loginVO.getAdmin());
 			if(loginVO.getAdmin() != null) {
-				redirectPath = "/main/mbList?page="+page;
+				redirectPath = "main/mbList?page="+page;  ///수정
 			}
 			CommonUtils.redirect(alertText, redirectPath, response);
 		}else {

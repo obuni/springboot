@@ -23,14 +23,16 @@ import com.co.kr.domain.BoardListDomain;
 import com.co.kr.service.UploadService;
 import com.co.kr.vo.FileListVO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+
 public class FileListController {
 	
 	@Autowired
-	private UploadService uploadService;
+	private UploadService uploadService;  //////////수정
 
 	
 	@PostMapping(value = "upload")
@@ -55,7 +57,7 @@ public class FileListController {
 			HttpSession session = request.getSession();
 			
 			map.put("bdSeq", Integer.parseInt(bdSeq));
-			BoardListDomain boardListDomain =uploadService.boardSelectOne(map);
+			BoardListDomain boardListDomain = uploadService.boardSelectOne(map);
 			System.out.println("boardListDomain"+boardListDomain);
 			List<BoardFileDomain> fileList =  uploadService.boardSelectOneFile(map);
 			

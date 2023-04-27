@@ -10,53 +10,55 @@ import com.co.kr.domain.LoginDomain;
 import com.co.kr.mapper.UserMapper;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserMapper userMapper;
+	private final UserMapper userMapper;
 
 	@Override
 	public void mbCreate(LoginDomain loginDomain) {
-		userMapper.mbCreate(loginDomain);
+		this.userMapper.mbCreate(loginDomain);
 	}
 
 	@Override
 	public LoginDomain mbSelectList(Map<String, String> map) {
-		return userMapper.mbSelectList(map);
+		return this.userMapper.mbSelectList(map);
 	}
 
 	@Override
 	public List<LoginDomain> mbAllList(Map<String, Integer> map) { 
-		return userMapper.mbAllList(map);
+		return this.userMapper.mbAllList(map);
 	}
 
 	@Override
 	public void mbUpdate(LoginDomain loginDomain) {
-		userMapper.mbUpdate(loginDomain);
+		this.userMapper.mbUpdate(loginDomain);
 	}
 
 	@Override
 	public void mbRemove(Map<String, String> map) {
-		userMapper.mbRemove(map);
+		this.userMapper.mbRemove(map);
 	}
 
 	@Override
 	public LoginDomain mbGetId(Map<String, String> map) {
-		return userMapper.mbGetId(map);
+		return this.userMapper.mbGetId(map);
 	}
 
 	@Override
 	public int mbDuplicationCheck(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		return userMapper.mbDuplicationCheck(map);
+		return this.userMapper.mbDuplicationCheck(map);
 	}
 
 	@Override
 	public int mbGetAll() {
 		// TODO Auto-generated method stub
-		return userMapper.mbGetAll();
+		return this.userMapper.mbGetAll();
 	}
 
 }
